@@ -1,0 +1,51 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 500, "height": 300,
+  "data": {"url": "https://raw.githubusercontent.com/ayonnasaha/Week10HW/refs/heads/main/data/Graph%201.1-%20proportion%20born%20overseas%20cleaned.csv"},
+  "transform": [
+    {
+      "fold": [
+        "Proportion of overseas-born (%)",
+        "Number of Australian-born (M)",
+        "Number of overseas-born (M)"
+      ],
+      "as": ["series", "value"]
+    }
+  ],
+  "selection": {
+    "series_highlight": {
+    "type": "multi",
+    "fields": ["series"],
+    "bind": "legend"
+  }
+},
+
+  "mark": "area",
+  "encoding": {
+    "x": {
+      "field": "Year", 
+      "type": "temporal",
+      "axis": {"format": "%Y", "title": "Year"}
+    },
+    "y": {
+      "field": "value", 
+      "type": "quantitative",
+      "title": "Value"
+    },
+    "color": {
+      "field": "series",
+      "type": "nominal",
+      "title": "Category"
+    },
+    "opacity": {
+    "condition": {"selection": "series_highlight", "value": 0.9},
+    "value": 0.2
+    },
+    "tooltip": [
+      {"field": "Year", "type": "temporal", "title": "Year", "format": "%Y"},
+      {"field": "series", "type": "nominal", "title": "Category"},
+      {"field": "value", "type": "quantitative", "title": "Value"}
+    ]
+  }
+  
+}
